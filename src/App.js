@@ -15,6 +15,7 @@ class App extends Component {
             totalCost: 0
         };
         this.handleAddToCart = this.handleAddToCart.bind(this);
+        this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
     }
 
     componentWillMount() {
@@ -48,12 +49,27 @@ class App extends Component {
         console.log(this.state.totalCost);
     }
 
+    handleRemoveFromCart(product) {
+        let cart = this.state.cart;
+        let arr = cart;
+        for (let i = 0; i < cart.length; i++) {
+            if (cart[i].id == product.id) {
+                arr.splice(i,1);
+
+            }
+        }
+        this.setState({
+            cart: arr,
+            totalCost: this.state.totalCost - product.product_price
+        });
+    }
+
 
     render() {
         return (
             <div>
                 <Product state = {this.state} handleAddToCart={this.handleAddToCart}/>
-                <Cart state = {this.state} handleAddToCart={this.handleAddToCart}/>
+                <Cart state = {this.state} handleAddToCart={this.handleAddToCart} handleRemoveFromCart={this.handleRemoveFromCart}/>
             </div>
         )
     }

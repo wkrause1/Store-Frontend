@@ -24,6 +24,9 @@ class Cart extends React.Component {
                 <h2 className={'cart-product-description'}>{product.product_description}</h2>
                 <img src={product.product_image} alt={"Mug"} height={200} width={200} className={'cart-product-image'}></img>
                 <h3 className={'cart-product-price'}>${product.product_price}</h3>
+                <button onClick={() => {
+                    this.props.handleRemoveFromCart(product);
+                }}>Remove From Cart</button>
             </div>
         )
 
@@ -33,7 +36,7 @@ class Cart extends React.Component {
             <div className={"modal-content"}>
                 <span className={"close"}>&times;</span>
                 <h1>Your cart:</h1>
-                <h2>Total: {this.props.state.totalCost}</h2>
+                <h2>Total: ${this.props.state.totalCost}</h2>
                 {items}
             </div>
         </div>
