@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-import logo from './logo.svg';
 import './App.css';
 import './product.scss'
 import Product from './Product'
@@ -52,15 +51,18 @@ class App extends Component {
     handleRemoveFromCart(product) {
         let cart = this.state.cart;
         let arr = cart;
+        let newTotal = 0;
         for (let i = 0; i < cart.length; i++) {
             if (cart[i].id == product.id) {
                 arr.splice(i,1);
-
             }
+        }
+        for (let i = 0; i < cart.length; i++) {
+            newTotal+= cart[i].product_price;
         }
         this.setState({
             cart: arr,
-            totalCost: this.state.totalCost - product.product_price
+            totalCost: newTotal
         });
     }
 
