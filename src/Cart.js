@@ -25,7 +25,6 @@ class Cart extends React.Component {
         let items = productsInCart.map((product) =>
             <div id={product.id} key={product.id} className={'cart-product'}>
                 <h1 className={'cart-product-name'}>{product.product_name}</h1>
-                <h2 className={'cart-product-description'}>{product.product_description}</h2>
                 <img src={product.product_image} alt={"Mug"} height={200} width={200} className={'cart-product-image'}></img>
                 <h3 className={'cart-product-price'}>${product.product_price}</h3>
                 <button onClick={() => {
