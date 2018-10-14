@@ -22,13 +22,14 @@ class Cart extends React.Component {
 
     render() {
         let productsInCart = this.props.state.cart;
-        let items = productsInCart.map((product) =>
-            <div id={product.id} key={product.id} className={'cart-product'}>
-                <h1 className={'cart-product-name'}>{product.product_name}</h1>
-                <img src={product.product_image} alt={"Mug"} height={200} width={200} className={'cart-product-image'}></img>
-                <h3 className={'cart-product-price'}>${product.product_price}</h3>
+        let items = productsInCart.map((cartItem) =>
+            <div id={cartItem.product.id} key={cartItem.product.id} className={'cart-product'}>
+                <h1 className={'cart-product-name'}>{cartItem.product.product_name}</h1>
+                <img src={cartItem.product.product_image} alt={"Mug"} height={200} width={200} className={'cart-product-image'}></img>
+                <h3 className={'cart-product-price'}>${cartItem.product.product_price}</h3>
+                <h3>Quantity:{cartItem.amount}</h3>
                 <button onClick={() => {
-                    this.props.handleRemoveFromCart(product);
+                    this.props.handleRemoveFromCart(cartItem);
                 }}>Remove From Cart</button>
             </div>
         )

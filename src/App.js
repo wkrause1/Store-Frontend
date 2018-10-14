@@ -34,20 +34,41 @@ class App extends Component {
     handleAddToCart(product) {
         let cart = this.state.cart;
         console.log("Entering add to cart method");
+        if (cart.length === 0) {
+            this.setState({
+                cart: this.state.cart.concat([{product: product, amount: 1}]),
+                totalCost: this.calculateTotalCost(),
+            });
+        }
         for (let i = 0; i < this.state.cart.length; i++) {
-            if ((cart[i].id === product.id)) {
-                return;
+            if ((cart[i].product.id === product.id)) {
+                cart[i].amount = cart[i].amount + 1;
+                this.setState({
+                    cart: cart,
+                    totalCost: this.calculateTotalCost(),
+                })
+            }
+            else {
+                this.setState({
+                    cart: this.state.cart.concat([{product: product, amount: 1}]),
+                    totalCost: this.calculateTotalCost(),
+                });
             }
         }
-        this.setState({
-            cart: this.state.cart.concat([product]),
-            totalCost: this.state.totalCost + product.product_price
-        });
         console.log(product.product_price);
         console.log("ITEM IN CART " + product);
         console.log(this.state.totalCost);
     }
 
+    calculateTotalCost() {
+        let cart = this.state.cart;
+        let newTotal = 0;
+        for (let i = 0; i < cart.length; i++) {
+            newTotal += cart[i].product.product_price * cart[i].amount;
+        }
+        console.log(newTotal);
+        return newTotal;
+    }
     handleRemoveFromCart(product) {
         let cart = this.state.cart;
         let arr = cart;
