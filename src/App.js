@@ -35,7 +35,7 @@ class App extends Component {
         let cart = this.state.cart;
         console.log("Entering add to cart method");
         for (let i = 0; i < this.state.cart.length; i++) {
-            if ((cart[i].id == product.id)) {
+            if ((cart[i].id === product.id)) {
                 return;
             }
         }
@@ -53,7 +53,7 @@ class App extends Component {
         let arr = cart;
         let newTotal = 0;
         for (let i = 0; i < cart.length; i++) {
-            if (cart[i].id == product.id) {
+            if (cart[i].id === product.id) {
                 arr.splice(i,1);
             }
         }

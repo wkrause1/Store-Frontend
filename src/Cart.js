@@ -14,7 +14,7 @@ class Cart extends React.Component {
             modal.style.display = "none";
         };
         window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target === modal) {
                 modal.style.display = "none";
             }
         }
@@ -22,7 +22,6 @@ class Cart extends React.Component {
 
     render() {
         let productsInCart = this.props.state.cart;
-        console.log("render of stuff in cart" + this.props.state.cart);
         let items = productsInCart.map((product) =>
             <div id={product.id} key={product.id} className={'cart-product'}>
                 <h1 className={'cart-product-name'}>{product.product_name}</h1>
