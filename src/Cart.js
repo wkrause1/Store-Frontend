@@ -22,7 +22,7 @@ class Cart extends React.Component {
     render() {
         let productsInCart = this.props.state.cart;
         let items = productsInCart.map((cartItem) =>
-            <div id={cartItem.product.id} key={cartItem.product.id} className={'cart-product'}>
+            <div id={'cart-item'} key={cartItem.product.id} className={'cart-product'}>
                 <h2 className={'cart-product-name'}>{cartItem.product.product_name}</h2>
                 <img src={cartItem.product.product_image} alt={"Mug"} height={200} width={200} className={'cart-product-image'}></img>
                 <h3 className={'cart-product-price'}>${cartItem.product.product_price.toFixed(2)}</h3>
@@ -33,7 +33,7 @@ class Cart extends React.Component {
             </div>
         );
 
-        return <div>
+        return <div id={'main-cart'}>
             <button id={'cartButton'} onClick={this.handleModal}>Open Cart</button>
             <div id={'cartModal'} className={'modal'}>
             <div className={"modal-content"}>

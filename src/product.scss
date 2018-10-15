@@ -11,6 +11,14 @@ $gray-light-bg: #f5f5f5;
 $gray-medium-bg: #f1f1f1;
 $gray-dark-bg: #dddddd;
 $green-light-bg: rgba(147, 220, 156, 0.15);
+#product-list {
+  display: inline-block;
+  padding: 20px;
+}
+#product-item {
+  display: inline-block;
+  padding: 20px;
+}
 .product {
   background: $white;
   margin: 16px;
@@ -116,4 +124,5 @@ $green-light-bg: rgba(147, 220, 156, 0.15);
       border-color: $primary-green;
     }
   }
+
 }
