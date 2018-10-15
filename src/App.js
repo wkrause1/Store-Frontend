@@ -69,22 +69,23 @@ class App extends Component {
         console.log(newTotal);
         return newTotal;
     }
-    handleRemoveFromCart(product) {
+    handleRemoveFromCart(cartItem) {
+        let i;
         let cart = this.state.cart;
-        let arr = cart;
-        let newTotal = 0;
-        for (let i = 0; i < cart.length; i++) {
-            if (cart[i].id === product.id) {
-                arr.splice(i,1);
+        for (i = 0; i < cart.length; i++) {
+            console.log("cart[i] prod id: " + cart[i].product.id);
+            console.log("product id: " + cartItem.product.id);
+            if (cart[i].product.id === cartItem.product.id) {
+                cart[i].amount = cart[i].amount - 1;
+            }
+            if (cart[i].amount === 0) {
+                cart.splice(i,1);
             }
         }
-        for (let i = 0; i < cart.length; i++) {
-            newTotal+= cart[i].product_price;
-        }
         this.setState({
-            cart: arr,
-            totalCost: newTotal
-        });
+            cart: cart,
+            totalCost: this.calculateTotalCost(),
+        })
     }
 
 
