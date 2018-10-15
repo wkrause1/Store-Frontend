@@ -23,10 +23,10 @@ class Cart extends React.Component {
         let productsInCart = this.props.state.cart;
         let items = productsInCart.map((cartItem) =>
             <div id={cartItem.product.id} key={cartItem.product.id} className={'cart-product'}>
-                <h1 className={'cart-product-name'}>{cartItem.product.product_name}</h1>
+                <h2 className={'cart-product-name'}>{cartItem.product.product_name}</h2>
                 <img src={cartItem.product.product_image} alt={"Mug"} height={200} width={200} className={'cart-product-image'}></img>
-                <h3 className={'cart-product-price'}>${cartItem.product.product_price}</h3>
-                <h3>Quantity:{cartItem.amount}</h3>
+                <h3 className={'cart-product-price'}>${cartItem.product.product_price.toFixed(2)}</h3>
+                <h3>Quantity: {cartItem.amount}</h3>
                 <button onClick={() => {
                     this.props.handleRemoveFromCart(cartItem);
                 }}>Remove From Cart</button>
@@ -39,7 +39,7 @@ class Cart extends React.Component {
             <div className={"modal-content"}>
                 <span className={"close"}>&times;</span>
                 <h1>Your cart:</h1>
-                <h2>Total: ${this.props.state.totalCost}</h2>
+                <h2>Total: ${this.props.state.totalCost.toFixed(2)}</h2>
                 {items}
             </div>
         </div>
