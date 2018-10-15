@@ -11,7 +11,7 @@ class Product extends React.Component {
                 <h2 className={'product-description'}>{product.product_description}</h2>
                 <img src={product.product_image} alt={"Mug"} height={200} width={200} className={'product-image'}></img>
                 <h3 className={'product-price'}>${(product.product_price).toFixed(2)}</h3>
-                <button onClick={() => {
+                <button id={'product-action'} onClick={() => {
                     this.props.handleAddToCart(product);
                 }}>Add To Cart</button>
             </div>

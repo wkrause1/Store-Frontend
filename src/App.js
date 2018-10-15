@@ -68,8 +68,6 @@ class App extends Component {
         let cart = this.state.cart;
         let newTotal = 0;
         for (let i = 0; i < cart.length; i++) {
-            console.log(cart[i].product.product_price);
-            console.log(cart[i].amount);
             newTotal += cart[i].product.product_price * cart[i].amount;
         }
         this.setState((prevState) => {
