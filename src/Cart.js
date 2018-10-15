@@ -39,7 +39,7 @@ class Cart extends React.Component {
             <div className={"modal-content"}>
                 <span className={"close"}>&times;</span>
                 <h1>Your cart:</h1>
-                <h2>Total: ${this.props.state.totalCost.toFixed(2)}</h2>
+                <h2 id={'cart-total'}>Total: ${this.props.state.totalCost.toFixed(2)}</h2>
                 {items}
             </div>
         </div>
