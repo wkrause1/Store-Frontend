@@ -34,24 +34,28 @@ class App extends Component {
     handleAddToCart(product) {
         let cart = this.state.cart;
         if (cart.length === 0) {
-            this.setState({
-                cart: this.state.cart.concat([{product: product, amount: 1}]),
-                totalCost: this.calculateTotalCost(),
+            cart = cart.concat([{product: product, amount: 1}]);
+            this.setState((prevState) => {
+                return {cart: prevState.cart.concat(cart),
+                        totalCost: product.product_price}
             });
         }
-        for (let i = 0; i < this.state.cart.length; i++) {
-            if ((cart[i].product.id === product.id)) {
-                cart[i].amount = cart[i].amount + 1;
-                this.setState({
-                    cart: cart,
-                    totalCost: this.calculateTotalCost(),
-                })
-            }
-            else {
-                this.setState({
-                    cart: this.state.cart.concat([{product: product, amount: 1}]),
-                    totalCost: this.calculateTotalCost(),
-                });
+        else {
+            for (let i = 0; i < this.state.cart.length; i++) {
+                if ((cart[i].product.id === product.id)) {
+                    cart[i].amount = cart[i].amount + 1;
+                    this.setState({
+                        cart: cart,
+                    });
+                    this.calculateTotalCost();
+                }
+                else {
+                    let prevTotal = this.calculateTotalCost();
+                    this.setState({
+                        cart: this.state.cart.concat([{product: product, amount: 1}]),
+                        totalCost: prevTotal + product.product_price,
+                    });
+                }
             }
         }
     }
@@ -60,8 +64,13 @@ class App extends Component {
         let cart = this.state.cart;
         let newTotal = 0;
         for (let i = 0; i < cart.length; i++) {
+            console.log(cart[i].product.product_price);
+            console.log(cart[i].amount);
             newTotal += cart[i].product.product_price * cart[i].amount;
         }
+        this.setState((prevState) => {
+            return {totalCost: newTotal}
+        });
         return newTotal;
     }
     handleRemoveFromCart(cartItem) {
@@ -77,8 +86,8 @@ class App extends Component {
         }
         this.setState({
             cart: cart,
-            totalCost: this.calculateTotalCost(),
         })
+        this.calculateTotalCost();
     }
 
 
