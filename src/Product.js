@@ -4,7 +4,6 @@ import './product.scss'
 class Product extends React.Component {
 
     render() {
-        console.log("Rendering Product");
         let products = this.props.state.products;
         let images = products.map((product) =>
             <img src={product.product_image} alt={''} width={200} height={200}></img>

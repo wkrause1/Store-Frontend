@@ -17,7 +17,7 @@ class App extends Component {
         this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let productArray = [];
         fetch('http://127.0.0.1:8000/store/').then(response => {
             return response.json();
@@ -33,7 +33,6 @@ class App extends Component {
 
     handleAddToCart(product) {
         let cart = this.state.cart;
-        console.log("Entering add to cart method");
         if (cart.length === 0) {
             this.setState({
                 cart: this.state.cart.concat([{product: product, amount: 1}]),
@@ -55,9 +54,6 @@ class App extends Component {
                 });
             }
         }
-        console.log(product.product_price);
-        console.log("ITEM IN CART " + product);
-        console.log(this.state.totalCost);
     }
 
     calculateTotalCost() {
@@ -66,15 +62,12 @@ class App extends Component {
         for (let i = 0; i < cart.length; i++) {
             newTotal += cart[i].product.product_price * cart[i].amount;
         }
-        console.log(newTotal);
         return newTotal;
     }
     handleRemoveFromCart(cartItem) {
         let i;
         let cart = this.state.cart;
         for (i = 0; i < cart.length; i++) {
-            console.log("cart[i] prod id: " + cart[i].product.id);
-            console.log("product id: " + cartItem.product.id);
             if (cart[i].product.id === cartItem.product.id) {
                 cart[i].amount = cart[i].amount - 1;
             }
