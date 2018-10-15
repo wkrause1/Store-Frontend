@@ -32,7 +32,7 @@ class Cart extends React.Component {
                     this.props.handleRemoveFromCart(cartItem);
                 }}>Remove From Cart</button>
             </div>
-        )
+        );
 
         return <div>
             <button id={'cartButton'} onClick={this.handleModal}>Open Cart</button>

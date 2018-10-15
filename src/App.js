@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom'
 import './App.css';
 import './product.scss'
@@ -33,30 +33,35 @@ class App extends Component {
 
     handleAddToCart(product) {
         let cart = this.state.cart;
+        let found = false;
         if (cart.length === 0) {
             cart = cart.concat([{product: product, amount: 1}]);
             this.setState((prevState) => {
-                return {cart: prevState.cart.concat(cart),
-                        totalCost: product.product_price}
+                return {
+                    cart: prevState.cart.concat(cart),
+                    totalCost: product.product_price
+                }
             });
         }
         else {
             for (let i = 0; i < this.state.cart.length; i++) {
                 if ((cart[i].product.id === product.id)) {
+                    found = true;
                     cart[i].amount = cart[i].amount + 1;
                     this.setState({
                         cart: cart,
                     });
                     this.calculateTotalCost();
                 }
-                else {
-                    let prevTotal = this.calculateTotalCost();
-                    this.setState({
-                        cart: this.state.cart.concat([{product: product, amount: 1}]),
-                        totalCost: prevTotal + product.product_price,
-                    });
-                }
             }
+            if (!found) {
+                let prevTotal = this.calculateTotalCost();
+                this.setState({
+                    cart: this.state.cart.concat([{product: product, amount: 1}]),
+                    totalCost: prevTotal + product.product_price,
+                });
+            }
+
         }
     }
 
@@ -73,6 +78,7 @@ class App extends Component {
         });
         return newTotal;
     }
+
     handleRemoveFromCart(cartItem) {
         let i;
         let cart = this.state.cart;
@@ -81,12 +87,12 @@ class App extends Component {
                 cart[i].amount = cart[i].amount - 1;
             }
             if (cart[i].amount === 0) {
-                cart.splice(i,1);
+                cart.splice(i, 1);
             }
         }
         this.setState({
             cart: cart,
-        })
+        });
         this.calculateTotalCost();
     }
 
@@ -94,8 +100,9 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Product state = {this.state} handleAddToCart={this.handleAddToCart}/>
-                <Cart state = {this.state} handleAddToCart={this.handleAddToCart} handleRemoveFromCart={this.handleRemoveFromCart}/>
+                <Product state={this.state} handleAddToCart={this.handleAddToCart}/>
+                <Cart state={this.state} handleAddToCart={this.handleAddToCart}
+                      handleRemoveFromCart={this.handleRemoveFromCart}/>
             </div>
         )
     }
